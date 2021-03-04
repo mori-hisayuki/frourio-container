@@ -3,12 +3,12 @@ services:
   main:
     build:
       context: .
-      dockerfile: ./alpine/Dockerfile
+      dockerfile: ./ubuntu/Dockerfile
       args:
+        USER_ID: 1000
+        GROUP_ID: 1000
         USER_NAME: vscode
         GROUP_NAME: vscode
-        USER_UID: 1000
-        USER_GID: 1000
         WORK_DIR: develop
     env_file: devcontainer.env
     environment:
