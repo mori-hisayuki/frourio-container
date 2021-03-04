@@ -1,0 +1,37 @@
+{
+	// Container名
+	"name": "Existing Docker Compose (Extend)",
+
+	// docker-compose.ymlの場所
+	"dockerComposeFile": "./docker-compose.yml",
+
+	// remote接続するContainer（docker-compose.ymlに記載したService名）
+	"service": "main",
+
+	// remote接続先のworkspaseディレクトリ
+	"workspaceFolder": "/home/vscode/develop",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.shell.linux": null
+	},
+
+	// remote接続先でインストールするExtension
+	"extensions": [
+		"vscodevim.vim",
+		"mhutchie.git-graph",
+		"vscode-icons-team.vscode-icons",
+		"buianhthang.gitflow",
+		"eamodio.gitlens",
+		"oderwat.indent-rainbow",
+		"ionutvmi.path-autocomplete",
+		"esbenp.prettier-vscode",
+		"humao.rest-client",
+		"tabnine.tabnine-vscode",
+		"github.vscode-pull-request-github",
+		"streetsidesoftware.code-spell-checker"
+	],
+
+	// remote接続先でのuser
+	"remoteUser": "vscode"
+}
