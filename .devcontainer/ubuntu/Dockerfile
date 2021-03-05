@@ -1,4 +1,4 @@
-FROM ubuntu:20.10
+FROM ubuntu:20.04
 
 ARG USER_ID
 ARG USER_NAME
@@ -6,12 +6,29 @@ ARG GROUP_ID
 ARG GROUP_NAME
 ARG DENO_VERSION
 
+# 証明書のDL
+RUN set -x \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+    && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
 # Install sudo
 RUN set -x \
     && apt-get -y update \
     && apt-get install -y --no-install-recommends \
     sudo \
     && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
+# Set TimeZone
+RUN set -x \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        tzdata \
+    && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* \
+    && ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
+    && echo 'Asia/Tokyo' >/etc/timezone
+
 
 # create group
 RUN set -x \
@@ -51,10 +68,10 @@ RUN set -x \
 RUN set -x \
     && mkdir /home/${USER_NAME}/develop
 
-# install node14
+# install node14 & npm
 RUN set -x \
     && apt-get -y update \
-    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y --no-install-recommends \
     nodejs \
     && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
