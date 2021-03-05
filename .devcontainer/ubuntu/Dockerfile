@@ -64,10 +64,6 @@ RUN set -x \
     && mkdir -p /home/${USER_NAME}/.vscode-server/extensions \
     && chown -R vscode:vscode /home/${USER_NAME}/.vscode-server
 
-# create working directory
-RUN set -x \
-    && mkdir /home/${USER_NAME}/develop
-
 # install node14 & npm
 RUN set -x \
     && apt-get -y update \
@@ -76,4 +72,11 @@ RUN set -x \
     nodejs \
     && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
+# install yarn
+RUN npm install -g yarn
+
 USER ${USER_NAME}
+
+# create working directory
+RUN set -x \
+    && mkdir /home/${USER_NAME}/develop
