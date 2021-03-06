@@ -1,12 +1,11 @@
 version: '3.2'
 services:
   # MySQL
-  db:
+  local-db:
     image: mysql:8.0.23
-    container_name: mysql_host
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test_database
+      MYSQL_DATABASE: DEVELOP_DATABASE
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       TZ: 'Asia/Tokyo'
@@ -16,8 +15,21 @@ services:
       - ./mysql/init:/docker-entrypoint-initdb.d
       # 永続化するときにマウントするdir
       - ./mysql/data:/var/lib/mysql
+      # logの出力先
+      - ./mysql/logs:/var/log/mysql
     ports:
       - 3306:3306
+  # phpMyAdmin
+  phpmyadmin:
+    container_name: test_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    environment:
+    - PMA_ARBITRARY=1
+    - PMA_HOSTS=local-db
+    - PMA_USER=docker
+    - PMA_PASSWORD=docker
+    ports:
+    - 8080:80
   main:
     build:
       context: .
