@@ -25,10 +25,11 @@ services:
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin
     environment:
-    - PMA_ARBITRARY=1
-    - PMA_HOSTS=local-mysql
-    - PMA_USER=docker
-    - PMA_PASSWORD=docker
+      PMA_ARBITRARY: 1
+      # PMA_HOSTSはlocal-dbでもlocal-mysqlでもよい
+      PMA_HOSTS: local-mysql
+      PMA_USER: docker
+      PMA_PASSWORD: docker
     ports:
     - 8080:80
   main:
