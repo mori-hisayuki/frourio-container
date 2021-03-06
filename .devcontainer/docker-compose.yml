@@ -1,5 +1,23 @@
 version: '3.2'
 services:
+  # MySQL
+  db:
+    image: mysql:8.0.23
+    container_name: mysql_host
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      # dockerコンテナとして起動したときに、ここにあるSQL文を実行
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      # 永続化するときにマウントするdir
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - 3306:3306
   main:
     build:
       context: .
@@ -14,7 +32,7 @@ services:
     environment:
       - TZ=JST-9
     ports:
-      - 80:80
+      - 3000:3000
     volumes:
       - ~/.ssh:/home/vscode/.ssh
     command: /bin/sh -c "while sleep 1000; do :; done"
