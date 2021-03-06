@@ -3,6 +3,7 @@ services:
   # MySQL
   local-db:
     image: mysql:8.0.23
+    container_name: local-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: DEVELOP_DATABASE
@@ -21,11 +22,11 @@ services:
       - 3306:3306
   # phpMyAdmin
   phpmyadmin:
-    container_name: test_phpmyadmin
+    container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin
     environment:
     - PMA_ARBITRARY=1
-    - PMA_HOSTS=local-db
+    - PMA_HOSTS=local-mysql
     - PMA_USER=docker
     - PMA_PASSWORD=docker
     ports:
