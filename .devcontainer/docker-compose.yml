@@ -14,7 +14,7 @@ services:
       # dockerコンテナとして起動したときに、ここにあるSQL文を実行
       - ./mysql/init:/docker-entrypoint-initdb.d
       # 永続化するときにマウントするdir
-      - ./mysql/data:/var/lib/mysql
+      - db-store:/var/lib/mysql
       # logの出力先
       - ./mysql/logs:/var/log/mysql
     ports:
@@ -48,3 +48,6 @@ services:
     volumes:
       - ~/.ssh:/home/vscode/.ssh
     command: /bin/sh -c "while sleep 1000; do :; done"
+
+volumes:
+  db-store:
