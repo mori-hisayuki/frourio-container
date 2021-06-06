@@ -32,10 +32,13 @@ services:
       PMA_PASSWORD: docker
     ports:
     - 8081:80
-  main:
+  node:
+    container_name: local-frourio
+    # ホスト名を明示的に指定する
+    hostname: local-frourio
     build:
       context: .
-      dockerfile: ./ubuntu/Dockerfile
+      dockerfile: ./arm/Dockerfile
       args:
         USER_ID: 1000
         GROUP_ID: 1000
@@ -52,6 +55,5 @@ services:
     volumes:
       - ~/.ssh:/home/vscode/.ssh
     command: /bin/sh -c "while sleep 1000; do :; done"
-
 volumes:
   db-store:

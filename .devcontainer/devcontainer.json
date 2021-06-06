@@ -6,7 +6,7 @@
 	"dockerComposeFile": "./docker-compose.yml",
 
 	// remote接続するContainer（docker-compose.ymlに記載したService名）
-	"service": "main",
+	"service": "node",
 
 	// remote接続先のworkspaseディレクトリ
 	"workspaceFolder": "/home/vscode/develop",
@@ -24,9 +24,9 @@
 		"buianhthang.gitflow",
 		"eamodio.gitlens",
 		"oderwat.indent-rainbow",
+		"firsttris.vscode-jest-runner",
 		"ionutvmi.path-autocomplete",
 		"esbenp.prettier-vscode",
-		"humao.rest-client",
 		"tabnine.tabnine-vscode",
 		"github.vscode-pull-request-github",
 		"streetsidesoftware.code-spell-checker"
